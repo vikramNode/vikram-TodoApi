@@ -1,0 +1,18 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "Todo API",
+  "main": "server.js",
+  "scripts": {
+    "test": "server.js"
+  },
+  "keywords": [
+    "TODO",
+    "API"
+  ],
+  "author": "Vikram",
+  "license": "license Free",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}

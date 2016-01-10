@@ -13,6 +13,14 @@ var todos = [{
     id:3,
     description:'Go to Market',
     completed:false
+},{
+    id:4,
+    description:'Go to Market',
+    completed:false
+},{
+    id:6,
+    description:'Go to Market',
+    completed:false
 }];
 
 app.get('/', function(req,res){
@@ -39,6 +47,11 @@ app.get('/todos/:id', function (req, res) {
         res.status(404).send();
         
     }
+});
+
+
+app.post('/todos', function(req, res){
+    res.json(todos);
 });
 
 app.listen(PORT, function(){

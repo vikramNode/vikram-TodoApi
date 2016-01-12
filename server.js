@@ -32,11 +32,11 @@ app.get('/todos/:id', function (req, res) {
 
 //Post Data
 app.post('/todos', function(req, res){
+    //console.log(req);
     var model = _.pick(req.body, 'description', 'completed');
     
-    if(_.isBoolean(model.completed) && _.isString(model.description) && model.description.length >= 1){
+    if(_.isBoolean(model.completed) && _.isString(model.description) && model.description.trim().length >= 1){
         model.id = toNextId++;
-        model.description = model.description.trim();
         todos.push(model);
         res.json(model);  
     } else{
@@ -45,6 +45,18 @@ app.post('/todos', function(req, res){
     
     
 });
+
+//delete data
+app.delete('/todos/:id', function(req,res){
+    var todoId = parseInt(req.params.id);
+    var deleteID = _.findWhere(todos, {id:todoId});
+    todos = _.without(todos, deleteID);
+    if(deleteID){
+        res.json(deleteID);
+    } else{
+        res.status(404).send();
+    }
+})
 
 app.listen(PORT, function(){
     console.log('Express Server Started on '+ PORT)

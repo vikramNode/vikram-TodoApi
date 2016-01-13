@@ -10,7 +10,7 @@ var toNextId = 1;
 app.use(bodyParser.json());
 
 app.get('/', function(req,res){
-   res.send('Todo API') ;
+   res.send('TODO') ;
 });
 
 //Get All Todos

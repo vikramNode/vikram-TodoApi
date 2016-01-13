@@ -15,6 +15,7 @@ app.get('/', function(req,res){
 
 //Get All Todos
 app.get('/todos', function(req, res){
+    console.log(req);
     res.json(todos);
 });
 
@@ -32,7 +33,7 @@ app.get('/todos/:id', function (req, res) {
 
 //Post Data
 app.post('/todos', function(req, res){
-    //console.log(req);
+    console.log(req.body);
     var model = _.pick(req.body, 'description', 'completed');
     
     if(_.isBoolean(model.completed) && _.isString(model.description) && model.description.trim().length >= 1){
@@ -57,6 +58,21 @@ app.delete('/todos/:id', function(req,res){
         res.status(404).send();
     }
 })
+
+
+//PUT data
+//creating route //getting id //findwhere //underscore //extend
+app.put('/todos/:id', function(req,res){
+    console.log(req.params);
+    var updatedTodo = _.pick(req.body,'description','completed');
+    var todoId = parseInt(req.params.id);
+    var matchTodo = _.findWhere(todos, {id:todoId});
+    console.log(matchTodo);
+    console.log(req.body);
+    _.extend(matchTodo, updatedTodo);
+    res.json(matchTodo);
+});
+
 
 app.listen(PORT, function(){
     console.log('Express Server Started on '+ PORT)

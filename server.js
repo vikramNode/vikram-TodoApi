@@ -74,6 +74,23 @@ app.put('/todos/:id', function(req,res){
 });
 
 
+//Fileter data
+//creating route //getting filter item from req.query //underscore where to get all the items based on the query
+app.get('/todosFilter', function(req,res){
+    console.log(req.query);
+    var matchTodo = _.filter(todos, function(obj){
+        console.log(obj);
+        return obj.description.toLowerCase().indexOf(req.query.description.toLowerCase())>-1;
+    });
+    console.log(matchTodo);
+    res.json(matchTodo);
+});
+
+app.get('/todo', function(req, res){
+    res.send('Hey, How are you?');
+})
+
+
 app.listen(PORT, function(){
     console.log('Express Server Started on '+ PORT)
 })
